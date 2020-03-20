@@ -19,6 +19,24 @@ allprojects {
     configurations.create("compileClasspath")
 }
 
+buildscript {
+    repositories {
+        println("Build script repo ${project.name}")
+        maven { url = uri("$rootDir/gradle-plugin/build/localDevRepo") }
+        maven { url = uri("https://dl.bintray.com/icerockdev/plugins") }
+
+        mavenLocal()
+
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        println("Build script dep ${project.name}")
+        classpath(Deps.Plugins.mokoNetwork)
+    }
+}
+
 tasks.register("clean", Delete::class).configure {
     delete(rootProject.buildDir)
 }

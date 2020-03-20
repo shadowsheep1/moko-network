@@ -43,3 +43,10 @@ openApiGenerate {
     generatorName.set("kotlin-ktor-client")
     additionalProperties.set(mutableMapOf("nonPublicApi" to "true"))
 }
+
+tasks.named("openApiGenerate") {
+    dependsOn(":gradle-plugin:uploadArchives")
+    doLast {
+        println("--> $project.name assemble task ended")
+    }
+}
