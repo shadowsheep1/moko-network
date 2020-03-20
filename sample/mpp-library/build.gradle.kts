@@ -42,3 +42,10 @@ openApiGenerate {
     inputSpec.set(file("src/swagger.json").path)
     generatorName.set("kotlin-ktor-client")
 }
+
+tasks.named("openApiGenerate") {
+    dependsOn(":gradle-plugin:uploadArchives")
+    doLast {
+        println("--> $project.name assemble task ended")
+    }
+}

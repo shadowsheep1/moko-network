@@ -5,6 +5,7 @@
 plugins {
     `kotlin-dsl`
     `maven-publish`
+    maven
 }
 
 repositories {
@@ -22,6 +23,19 @@ dependencies {
 
 kotlinDslPluginOptions {
     experimentalWarning.set(false)
+}
+
+tasks.named<Upload>("uploadArchives") {
+    repositories.withGroovyBuilder {
+        "mavenDeployer" {
+            "repository"("url" to uri("$rootDir/gradle-plugin/build/localDevRepo"))
+            "pom" {
+                setProperty("version", Versions.Libs.MultiPlatform.mokoNetwork)
+                setProperty("artifactId", "network-generator")
+                setProperty("groupId", "dev.icerock.moko")
+            }
+        }
+    }
 }
 
 publishing {
