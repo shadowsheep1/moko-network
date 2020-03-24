@@ -41,7 +41,7 @@ dependencies {
 openApiGenerate {
     inputSpec.set(file("src/swagger.json").path)
     generatorName.set("kotlin-ktor-client")
-    additionalProperties.set(mutableMapOf("nonPublicApi" to "false"))
+    //additionalProperties.set(mutableMapOf("nonPublicApi" to "false"))
 }
 
 tasks.named("openApiGenerate") {
